@@ -39,8 +39,9 @@ M574 Y1 S1 P"ystop"                            ; configure active-high endstop f
 M574 Z1 S1 P"zstop"                            ; configure active-high endstop for low end on Z via pin zstop
 
 ; Z-Probe
-M558 P0 H5 F120 T6000                          ; disable Z probe but set dive height, probe speed and travel speed
-M557 X15:215 Y15:195 S20                       ; define mesh grid
+M558 P1 C"zprobe.in" H3 F200 T6000                          ; Enable IR Z probe, set dive height, probe speed and travel speed
+M557 X25:195 Y20:195 S20                       ; define mesh grid
+G31 T1 X-40 Y0 Z1.7
 
 ; Heaters
 M308 S0 P"bedtemp" Y"thermistor" T100000 B4092	 ; configure sensor 0 as thermistor on pin bedtemp
@@ -65,7 +66,7 @@ M106 P0 S1 H1 T40                              ; set fan 0 value. Thermostatic c
 M950 F1 C"fan1" Q500                           ; create fan 1 on pin fan1 and set its frequency
 M106 P1 S1 H1 T40                              ; set fan 1 value. Thermostatic control is turned on
 M950 F2 C"fan2" Q500                           ; create fan 2 on pin fan2 and set its frequency
-M106 P2 S0 H-1                                 ; set fan 2 value. Thermostatic control is turned off
+M106 P2 S0.7 H1 T40                              ; set CPU fan 2 value. Thermostatic control is turned on based on hotend (Stepper motors will only run with hotend on)
 
 ; Tools
 M563 P0 S"Hotend" D0 H1					; Define tool 0
