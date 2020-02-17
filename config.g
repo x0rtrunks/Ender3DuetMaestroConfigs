@@ -22,9 +22,9 @@ M569 P3 S0						; Drive 3 goes backwards
 M350 X16 Y16 Z16 E16 I1					; Configure microstepping with interpolation
 M92 X80 Y80 Z400 E97					; Set steps per mm
 M350 X32 Y32 E128 I1					; Set steps per mm for the extruder to x128 (776 steps per mm) and X and Y to x32 (160 steps per mm)
-M566 X800 Y800 Z60 E3000 P1				; Set maximum instantaneous speed changes (mm/min)
-M203 X12000 Y12000 Z900 E6000				; Set maximum speeds (mm/min)
-M201 X6000 Y6000 Z200 E5000				; Set accelerations (mm/s^2)
+M566 X600 Y600 Z60 E600 P1				; Set maximum instantaneous speed changes (mm/min)
+M203 X10800 Y10800 Z900 E600				; Set maximum speeds (mm/min)
+M201 X1500 Y1500 Z60 E3000				; Set accelerations (mm/s^2)
 M204 P600 T2000						; Set accelerations (mm/s^2) for print and travel moves
 M906 X700 Y700 Z700 E800 I30				; Set motor currents (mA) and motor idle factor in per cent
 M84 S30							; Set idle timeout
@@ -74,10 +74,10 @@ G10 P0 X0 Y0 Z0						; Set tool 0 axis offsets
 G10 P0 R0 S0						; Set initial tool 0 active and standby temperatures to 0C
 
 ; Pressure Advance
-M572 D0 S0.35						
+M572 D0 S0.1						
 
 ; Retraction
-M207 S6.5 R0.0 F4800 T4800 Z0.0 
+M207 S9 R0.0 F4800 T4800 Z0.0 
 
 	; M207: Set retract length
 	; Parameters
@@ -102,21 +102,10 @@ M911 S21 R23 P"M913 X0 Y0 G91 M83 G1 Z3 E-5 F1000"	; Set voltage thresholds and 
 
 ; Custom settings
 ; M918 P1 E4						; Enable 12864 LCD with 1 menu item per encoder click
-M912 P0 S-13						; CPU temperature calibration
+; M912 P0 S-13						; CPU temperature calibration
 
 ; Miscellaneous
 M501							; Load saved parameters from non-volatile memory
 T0							; Select first tool
-
-; BLTouch startup
-; G4 S2							; Pause a couple seconds
-; M280 P64 S160						; Clear any alarms
-; G4 S2							; Pause a couple seconds
-; M402							; retract pin just in case
-
-; Startup Tune
-;
-; G4 S10 Wait for 10 seconds
-; M98 P"0:/macros/Musical Tunes/Startup.g"
 
 M552 S1							; Enable network
